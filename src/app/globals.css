@@ -1,0 +1,96 @@
+@import "tailwindcss";
+
+/* `hover:` as a plain :hover, as the prototype's style-hover compiles. Tailwind's default
+   wraps it in @media (hover: hover), which drops the hover state that a tap leaves on touch screens. */
+@custom-variant hover (&:hover);
+
+/* ── Design tokens (shared verbatim with the product app) ───────────────── */
+@theme {
+  --color-ink: #111820;
+  --color-ink-2: #1D2732;
+  --color-ink-3: #232E3A;
+  --color-paper: #F4F2EC;
+  --color-grey: #69737B;
+  --color-grey-2: #9AA1A7;
+  --color-grey-3: #97A1AA;
+  --color-accent: #D8832F;
+  --color-accent-hover: #E39040;
+  --color-success: #3E5E4A;
+  --color-success-light: #9BC7A9;
+  --color-danger: #B7473A;
+  --color-danger-light: #E89287;
+}
+
+@theme inline {
+  --font-display: var(--font-barlow-condensed), sans-serif;
+  --font-sans: var(--font-ibm-plex-sans), sans-serif;
+  --font-mono: var(--font-ibm-plex-mono), monospace;
+}
+
+/* ── Base styles (prototype <style> block + root text) ──────────────────── */
+@layer base {
+  html {
+    height: 100%;
+    background: var(--color-paper);
+  }
+
+  body {
+    margin: 0;
+    padding: 0;
+    background: var(--color-paper);
+    min-height: 100%;
+    min-height: 100dvh;
+    overscroll-behavior-y: none;
+    font-family: --theme(--font-sans);
+    font-size: 15px;
+    line-height: 1.5;
+    color: var(--color-ink);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  a {
+    color: var(--color-ink);
+  }
+
+  a:hover {
+    color: var(--color-accent);
+  }
+
+  ::selection {
+    background: rgba(216, 131, 47, 0.25);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+}
+
+/* Splash animations (the app-only mmFade / mmSheet keyframes are not needed here). */
+@keyframes mmDraw {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes mmPulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.3;
+  }
+}

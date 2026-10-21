@@ -51,3 +51,12 @@ npx tsc --noEmit  # type-check
 Set `NEXT_PUBLIC_APP_URL` to the production app URL, and `NEXT_PUBLIC_SITE_URL` to the
 landing's public URL. Set both in the build environment, then build. Because the values
 are inlined at build time, changing them requires a rebuild.
+
+### Vercel
+
+- Project `mario-landing` (team `aneldevelopers-projects`) → https://mario-landing.vercel.app. It is connected to
+  `github.com/AnelDeveloper/mario-landing`: every push to `main` deploys to production, other branches get previews.
+- `vercel.json` pins the framework to Next.js (a project created from the CLI starts as "Other" and serves 404s).
+- Environment variables (Production and Preview): `NEXT_PUBLIC_APP_URL=https://mandaric-app.vercel.app`.
+  `NEXT_PUBLIC_SITE_URL` is not set: it falls back to the production domain (`VERCEL_PROJECT_PRODUCTION_URL`).
+  Set it when a custom domain is added, then redeploy.
